@@ -1,3 +1,25 @@
-*.pdf
 *.aux
 *.log
+*.fls
+*.bbl
+*.blg
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.slo
+*.sls
+*.toc
+*.slg
+*.synctex.gz
+*.ist
+*.swp
+*.dvi
+*.idx
+*.out
+source material
+*.db
+master.pdf
+.idea/
+out/
+main.pdf
