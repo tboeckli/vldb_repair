@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/vldb_implication.iml" filepath="$PROJECT_DIR$/.idea/vldb_implication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vldb_repair.iml" filepath="$PROJECT_DIR$/.idea/vldb_repair.iml" />
     </modules>
   </component>
 </project>

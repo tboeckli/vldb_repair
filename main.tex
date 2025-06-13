@@ -4,6 +4,9 @@
 
 \documentclass[sigconf, nonacm]{acmart}
 
+\usepackage{amsmath}
+\usepackage{pdfx}
+
 %% The following content must be adapted for the final version
 % paper-specific
 \newcommand\vldbdoi{XX.XX/XXX.XX}
@@ -18,7 +21,23 @@
 % leave empty if no availability url should be set
 \newcommand\vldbavailabilityurl{URL_TO_YOUR_ARTIFACTS}
 % whether page numbers should be shown or not, use 'plain' for review versions, 'empty' for camera ready
-\newcommand\vldbpagestyle{plain} 
+\newcommand\vldbpagestyle{plain}
+
+\newcommand{\attr}{a}
+\newcommand{\attrindex}[1]{\attr_{#1}}
+\newcommand{\attrset}{\mathcal{A}}
+\newcommand{\domain}{A}
+\newcommand{\domainindex}[1]{\domain_{#1}}
+\newcommand{\formula}{\varphi}
+\newcommand{\predicate}{P}
+\newcommand{\projection}[2]{#1[#2]}
+\newcommand{\relation}{R}
+\newcommand{\schema}{\mathcal{R}}
+\newcommand{\selection}[2]{#1_#2}
+\newcommand{\srule}{r}
+\newcommand{\sruleid}[1]{\srule_{#1}}
+\newcommand{\tuple}{t}
+\newcommand{\tupleid}[1]{\tuple_{#1}}
 
 \begin{document}
 

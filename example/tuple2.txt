@@ -1,0 +1,18 @@
+tuple:
+------
+pc: 28.92
+ltp: 27.72
+cid: 1.2
+tl: 27.63
+th: 28.78
+
+change expressions:
+-------------------
+ce1: CID < 0
+ce2: PC >= 0 & PC < LTP & LTP >= 27.63 & LTP <= TH & PC < TH & TH >= 27.63
+ce3: CID = 0 & PC = LTP & LTP >= 27.63 & LTP <= TH & PC >= 27.63 & PC <= TH & TH >= 27.63
+
+minimal-cost change expressions:
+--------------------------------
+cid = -1.2
+pc = 26.52

@@ -1,0 +1,25 @@
+attributes:
+-----------
+PC: DECIMAL (SCALE 2)
+LTP: DECIMAL (SCALE 2)
+CID: DECIMAL (SCALE 2)
+TL: DECIMAL (SCALE 2)
+TH: DECIMAL (SCALE 2)
+
+ruleset:
+--------
+PC >= 0
+LTP >= 0
+TL >= 0
+TH >= 0
+not (PC <= LTP & CID < 0)
+not (PC >= LTP & CID > 0)
+not (PC != LTP & CID == 0)
+not (LTP < TL)
+not (LTP > TH)
+
+cpfs:
+-----
+PC > 0 & LTP >= 0 & TL >= 0 & TH >= 0 & PC > LTP & CID < 0 & LTP >= TL & LTP <= TH & PC > TL & TL <= TH
+PC >= 0 & LTP > 0 & TL >= 0 & TH >= 0 & CID > 0 & PC < LTP & LTP >= TL & LTP <= TH & PC < TH & TL <= TH
+PC >= 0 & LTP >= 0 & TL >= 0 & TH >= 0 & CID = 0 & PC = LTP & LTP >= TL & LTP <= TH & PC >= TL & PC <= TH & TL <= TH

@@ -1,0 +1,17 @@
+tuple:
+------
+pc: 55.24
+ltp: 55.65
+cid: 0.41
+tl: 55.25
+th: 0
+
+change expressions:
+-------------------
+ce1: PC > 0 & LTP >= 0 & TL >= 0 & TH >= 0 & PC > LTP & CID < 0 & LTP >= TL & LTP <= TH & PC > TL & TL <= TH
+ce2: PC >= 0 & LTP > 0 & TL >= 0 & TH >= 0 & PC < LTP & LTP >= TL & LTP <= TH & PC < TH & TL <= TH
+ce3: PC >= 0 & LTP >= 0 & TL >= 0 & TH >= 0 & CID = 0 & PC = LTP & LTP >= TL & LTP <= TH & PC >= TL & PC <= TH & TL <= TH
+
+minimal-cost change expressions:
+--------------------------------
+TH >= 55.65

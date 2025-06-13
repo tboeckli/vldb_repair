@@ -1,18 +1,32 @@
 \section{Preliminaries}
 \label{sec:preliminaries}
 
+\paragraph{Relational model.}
+In this paper, we assume the relational model~\cite{Codd1970}.
+Within this context, let $\attrset$ be a countable set of attributes.
+For each attribute $\attr \in \attrset$, let $\domain$ denote the domain of possible values, excluding the \texttt{null}-value (or missing value).
+Without loss of generality, we assume that each domain is countable (possibly ordered or unordered).
+In the case of continuous domains, we enforce countability of $\domain$ by applying fixed-precision truncation on the domain values.
+In Example~\ref{ex:runningexample}, each value is, for example, truncated to two decimals.
+A (relation) schema $\schema$ is a finite, non-empty subset of attributes $\schema = \{\attrindex{1},\ldots,\attrindex{k}\}$.
+A relation $\relation$ over $\schema$ is a finite set $\relation \subseteq \domainindex{1} \times \ldots \times \domainindex{k}$, where $\domainindex{i}$ is the domain of $\attrindex{i}$.
+Each element of $\relation$ is a tuple $\tuple$ over $\schema$, and we assume that $\schema$ includes a distinguished attribute \texttt{tid} whose values uniquely identify the tuples in $\relation$.
+
+\paragraph{Relational algebra.}
+Let $\relation$ be a relation over schema $\schema$ and $X \subseteq \schema$.
+We denote the projection of $\relation$ over $X$ by $\projection{\relation}{X}$, or, analogously, by $\projection{\tuple}{X}$ for a single tuple $\tuple \in \relation$.
+If $X$ is a singleton $\{\attr\}$, we denote the projection by $\projection{\relation}{\attr}$.
+Additionally, we consider (propositional) predicates $\predicate$ over $\schema$ as Boolean conditions evaluated on tuples.
+Predicates can be combined into (propositional) formulas $\formula$ by means of the Boolean operators $\wedge$ (and), $\vee$ (or) and $\neg$ (not).
+Given a relation $\relation$ and predicate $\predicate$ (resp.\ formula $\formula$), we write $\selection{\relation}{\predicate}$ (resp.\ $\selection{\relation}{\formula}$) for the selection (resp.\ generalized selection) applied on $\relation$ with predicate $\predicate$ (resp.\ formula $\formula$).
+This operation returns the set of tuples in $\relation$ that satisfy $\predicate$ (resp. $\formula$), formally defined as $\{\tuple \mid \tuple \in \relation \wedge \tuple \models \predicate \}$ (resp.\ $\{\tuple \mid \tuple \in \relation \wedge \tuple \models \formula \}$).
+
+\paragraph{Selection rules.}
+Within the relational model, a selection rule is a type of constraint that can be used to enforce data consistency at the level of tuples~\cite{Boeckling2022}.
+
 \begin{itemize}
-    \item The relational model
-    \begin{itemize}
-        \item Attributes
-        \item Domains and domain types
-        \item Relation schema, relation and tuple
-    \end{itemize}
-    \item Selection rules
-    \begin{itemize}
-        \item Propositional formula, predicates (constant, variable, set)
-        \item Satisfaction
-        \item Variable and constant
-        \item Normal form
-    \end{itemize}
+    \item Propositional formula, predicates (constant, variable, set)
+    \item Satisfaction
+    \item Variable and constant
+    \item Normal form
 \end{itemize}

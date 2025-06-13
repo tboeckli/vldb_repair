@@ -1,2 +1,42 @@
 \section{Introduction}
 \label{sec:introduction}
+
+\begin{table}[hb]% h asks to places the floating element [h]ere.
+    \caption{Example data}
+    \label{tab:runningexampledata}
+    \begin{tabular}{c||c|c|c|c|c}
+        \toprule
+        \textbf{tid} & \textbf{pc} & \textbf{ltp} & \textbf{cd} & \textbf{tl} & \textbf{th} \\
+        \midrule
+        1 & 7.78 & 7.56 & -0.22 & 7.48 & 7.74 \\
+        2 & 28.92 & 27.72 & 1.20 $\rightarrow$ -1.20 & 27.63 & 28.78 \\
+        3 & 55.24 & 55.65 & 0.41 & 55.25 & \texttt{null} $\rightarrow$ 55.87 \\
+        4 & 39.11 & 38.99 & 0.12 $\rightarrow$ -0.12 & 38.03 & 38.71 $\rightarrow$ 39.17 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[hb]% h asks to places the floating element [h]ere.
+    \caption{Example rules}
+    \label{tab:runningexamplerules}
+    \begin{tabular}{c|c||c|c}
+        \toprule
+        \textbf{rule} & $\formula$ & \textbf{rule} & $\formula$ \\
+        \midrule
+        $\sruleid{1}$ & $\text{pc} \geq 0$ & $\sruleid{10}$ & $\neg (\text{pc} \leq \text{tl} \wedge \text{cd} < 0)$ \\
+        $\sruleid{2}$ & $\text{ltp} \geq 0$ & $\sruleid{11}$ & $\neg (\text{pc} < \text{tl} \wedge \text{cd} = 0)$ \\
+        $\sruleid{3}$ & $\text{tl} \geq 0$ & $\sruleid{12}$ & $\neg (\text{pc} \geq \text{th} \wedge \text{cd} > 0)$ \\
+        $\sruleid{4}$ & $\text{th} \geq 0$ & $\sruleid{13}$ & $\neg (\text{pc} > \text{th} \wedge \text{cd} = 0)$ \\
+        $\sruleid{5}$ & $\neg (\text{pc} \leq \text{ltp} \wedge \text{cd} < 0)$ & $\sruleid{14}$ & $\neg (\text{ltp} \leq 0 \wedge \text{cd} > 0)$ \\
+        $\sruleid{6}$ & $\neg (\text{pc} \geq \text{ltp} \wedge \text{cd} > 0)$ & $\sruleid{15}$ & $\neg (\text{pc} \leq 0 \wedge \text{cd} < 0)$ \\
+        $\sruleid{7}$ & $\neg (\text{pc} \neq \text{ltp} \wedge \text{cd} = 0)$ & $\sruleid{16}$ & $\neg (\text{th} \leq 0 \wedge \text{cd} > 0)$ \\
+        $\sruleid{8}$ & $\neg (\text{ltp} < \text{tl})$ & $\sruleid{17}$ & $\neg (\text{th} < \text{tl})$ \\
+        $\sruleid{9}$ & $\neg (\text{ltp} > \text{th})$ & & \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{example}
+\label{ex:runningexample}
+    TODO
+\end{example}
