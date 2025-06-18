@@ -207,7 +207,7 @@
  year = 1970
 }
 
-@article{Boeckling2022,
+@article{Boeckling2022a,
  author={Boeckling, Toon and De Tré, Guy and Bronselaer, Antoon},
  journal={IEEE Access},
  title={Cleaning Data With Selection Rules},
@@ -216,4 +216,32 @@
  pages={125212-125229},
  keywords={Algebra;Maintenance engineering;Finite element analysis;Relational databases;Redundancy;Location awareness;Data integrity;Data quality;relational algebra;consistency;rules},
  doi={10.1109/ACCESS.2022.3222786}
+}
+
+@article{Boeckling2022b,
+ author = {Boeckling, Toon and De Tré, Guy and Bronselaer, Antoon},
+ title = {Efficient Edit Rule Implication for Nominal and Ordinal Data},
+ journal = {Information Sciences},
+ volume = {590},
+ pages = {179-197},
+ year = {2022},
+ issn = {0020-0255},
+ doi = {https://doi.org/10.1016/j.ins.2021.12.114},
+ url = {https://www.sciencedirect.com/science/article/pii/S0020025521013360},
+ keywords = {Data quality, Edit rules, Rule implication},
+ abstract = {Edit rule implication is an essential subtask when repairing data inconsistencies against a set of edit rules. In this paper, novel techniques to enhance the performance of this subtask are studied. Our work includes several contributions. First, we draw attention to the case of nominal edit rules in particular. We point out that in many cases, starting with a set of edit rules that is as small as possible is important to improve the performance. This could be achieved by folding edit rules together. Besides that, an enhanced nominal edit rule implication algorithm is proposed, exploiting the properties of nominal edit rules. Second, we introduce ordinal edit rules as a generalization of nominal edit rules, used to capture data inconsistencies for data measured on an ordinal scale and we propose an ordinal edit rule implication algorithm. Evaluation of our methods shows promising results for both implication algorithms, with the ordinal algorithm as best performing in general. On average, our techniques improve the state-of-the-art algorithm for edit rule implication with more than 50%.}
+}
+
+@article{Bronselaer2023,
+ author = {Bronselaer, Antoon and Acosta, Maribel},
+ title = {Parker: Data Fusion Through Consistent Repairs using Edit Rules under Partial Keys},
+ journal = {Information Fusion},
+ volume = {100},
+ pages = {101942},
+ year = {2023},
+ issn = {1566-2535},
+ doi = {https://doi.org/10.1016/j.inffus.2023.101942},
+ url = {https://www.sciencedirect.com/science/article/pii/S1566253523002580},
+ keywords = {Data fusion, Data quality, Edit rules, Key constraints, Functional dependencies},
+ abstract = {Data integration is the problem of consolidating information provided by multiple sources. After schema mapping and duplicate detection have been dealt with, the problem consists in fusing disparate data that comes from the sources. In this work, we treat this problem as a data cleaning problem where consistency within and between sources is modelled by respectively edit rules and a partial key. The combination of these constraints leads to the definition of edit rules under a partial key (EPKs). We show that we can adapt the well-known set cover method for edit rules to the setting of EPKs and this yields an efficient algorithm to find minimal-cost repairs. These repairs then provide solutions for the initial data fusion problem. The methodology is implemented in a repair engine called Parker. Empirical results show that Parker is several orders of magnitude faster than state-of-the-art repair tools. At the same time, the quality of the repairs in terms of F1-score ranges from comparable to better compared to these tools.}
 }

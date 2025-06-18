@@ -4,29 +4,66 @@
 \paragraph{Relational model.}
 In this paper, we assume the relational model~\cite{Codd1970}.
 Within this context, let $\attrset$ be a countable set of attributes.
-For each attribute $\attr \in \attrset$, let $\domain$ denote the domain of possible values, excluding the \texttt{null}-value (or missing value).
-Without loss of generality, we assume that each domain is countable (possibly ordered or unordered).
+For each attribute $\attr \in \attrset$, let $\domain$ denote its \emph{domain} of possible values, excluding the \texttt{null}-value (or missing value).
+Without loss of generality, we assume that each domain is infinite, yet countable (either ordered or unordered).
 In the case of continuous domains, we enforce countability of $\domain$ by applying fixed-precision truncation on the domain values.
-In Example~\ref{ex:runningexample}, each value is, for example, truncated to two decimals.
-A (relation) schema $\schema$ is a finite, non-empty subset of attributes $\schema = \{\attrindex{1},\ldots,\attrindex{k}\}$.
-A relation $\relation$ over $\schema$ is a finite set $\relation \subseteq \domainindex{1} \times \ldots \times \domainindex{k}$, where $\domainindex{i}$ is the domain of $\attrindex{i}$.
-Each element of $\relation$ is a tuple $\tuple$ over $\schema$, and we assume that $\schema$ includes a distinguished attribute \texttt{tid} whose values uniquely identify the tuples in $\relation$.
+For instance, in Example~\ref{ex:runningexample}, each decimal number is truncated to two decimals places.
+A \emph{(relation) schema} $\schema = \{\attrindex{1},\ldots,\attrindex{k}\}$ is a finite, non-empty subset of attributes.
+A \emph{relation} $\relation$ over $\schema$ is a finite set $\relation \subseteq \domainindex{1} \times \ldots \times \domainindex{k}$, where $\domainindex{i}$ is the domain of $\attrindex{i}$.
+Each element $\tuple \in \relation$ is called a \emph{tuple} $\tuple$ over $\schema$, and we assume that each $\schema$ includes a distinguished attribute \texttt{tid} whose values uniquely identify the tuples in $\relation$.
+Finally, the \emph{projection} of a relation $\relation$ onto $X \subseteq \schema$ is denoted by $\projection{\relation}{X}$, or, analogously, by $\projection{\tuple}{X}$ for a single tuple $\tuple \in \relation$.
+If $X$ is a singleton $\{\attr\}$, we denote the projection of $\relation$ over $\{\attr\}$ by $\projection{\relation}{\attr}$.
 
-\paragraph{Relational algebra.}
-Let $\relation$ be a relation over schema $\schema$ and $X \subseteq \schema$.
-We denote the projection of $\relation$ over $X$ by $\projection{\relation}{X}$, or, analogously, by $\projection{\tuple}{X}$ for a single tuple $\tuple \in \relation$.
-If $X$ is a singleton $\{\attr\}$, we denote the projection by $\projection{\relation}{\attr}$.
-Additionally, we consider (propositional) predicates $\predicate$ over $\schema$ as Boolean conditions evaluated on tuples.
-Predicates can be combined into (propositional) formulas $\formula$ by means of the Boolean operators $\wedge$ (and), $\vee$ (or) and $\neg$ (not).
-Given a relation $\relation$ and predicate $\predicate$ (resp.\ formula $\formula$), we write $\selection{\relation}{\predicate}$ (resp.\ $\selection{\relation}{\formula}$) for the selection (resp.\ generalized selection) applied on $\relation$ with predicate $\predicate$ (resp.\ formula $\formula$).
-This operation returns the set of tuples in $\relation$ that satisfy $\predicate$ (resp. $\formula$), formally defined as $\{\tuple \mid \tuple \in \relation \wedge \tuple \models \predicate \}$ (resp.\ $\{\tuple \mid \tuple \in \relation \wedge \tuple \models \formula \}$).
+%\paragraph{Relational algebra.}
+%Additionally, we consider \emph{(propositional) atoms} (or \emph{predicates}) $\atom$ over $\schema$ as Boolean conditions evaluated on tuples.
+%Atoms can be combined into \emph{(propositional) formulas} $\formula$ by means of the Boolean operators $\wedge$ (and), $\vee$ (or) and $\neg$ (not).
+%Given a relation $\relation$ and atom $\atom$ (resp.\ formula $\formula$), we write $\selection{\relation}{\atom}$ (resp.\ $\selection{\relation}{\formula}$) for the \emph{selection} (resp.\ \emph{generalized selection}) applied on $\relation$ with atom $\atom$ (resp.\ formula $\formula$).
+%This operation returns the set of tuples in $\relation$ that \emph{satisfy} $\atom$ (resp. $\formula$), or $\selection{\relation}{\atom} = \{\tuple \mid \tuple \in \relation \wedge \tuple \models \atom \}$ (resp.\ $\selection{\relation}{\formula} = \{\tuple \mid \tuple \in \relation \wedge \tuple \models \formula \}$).
 
 \paragraph{Selection rules.}
-Within the relational model, a selection rule is a type of constraint that can be used to enforce data consistency at the level of tuples~\cite{Boeckling2022}.
+Within the relational model, a \emph{selection rule} is a type of integrity constraint that is used to enforce consistency at the level of tuples in a relation~\cite{Boeckling2022b,Boeckling2022a,Bronselaer2023}.
+Formally, a selection rule $\srule$ over schema $\schema$ is defined by a (propositional) formula $\formula$ of the form
+\begin{equation}
+    \label{eq:sruleform}
+    \neg (\atomindex{1} \wedge \ldots \wedge \atomindex{l}),
+\end{equation}
+in which each atom $\atom$ is either a \emph{constant} atom $\attr\;\operator\;\domainvalue$, a \emph{set} atom $\attr\;\operator\;\valueset$, or a \emph{variable} atom $\attrindex{i}\;\operator\;\attrindex{j}$.
+Here, $\attr, \attrindex{i}, \attrindex{j} \in \schema$ share a common domain $\domain$, $\domainvalue \in \domain$ is a constant, and $\valueset \subseteq \domain$ is a finite set of constants.
+For constant and variable atoms, the comparison operator $\operator$ is drawn from $\{\leq, <, \geq, >, =, \neq\}$ if $\domain$ is ordered, and from $\{=, \neq\}$ otherwise.
+For set atoms, we have that $\operator \in \{\in, \notin\}$.
+In the context of ordered domains, we consider an extension of variable atoms which allows us to explicitly express \emph{gaps} between the values of the attributes.
+More specifically, these atoms take the form $\attrindex{i}\;\operator\; \successorfunction{n}{\attrindex{j}}$ in this case, with $n \in \mathbb{Z}$ and $\successor: \domain \rightarrow \domain$ the so-called \emph{successor function}.
+This function returns for each $\domainvalue \in \domain$ the smallest value $\domainvalue' \in \domain$ such that $\domainvalue < \domainvalue'$ and there is no $\domainvalue'' \in \domain$ with $\domainvalue < \domainvalue'' < \domainvalue'$.
+Moreover, we write $\successorpower{n}$ for the $n$-fold application of the successor function.
+If $n < 0$, the application of the \emph{inverse} successor function, also referred to as the \emph{predecessor} function, is assumed.
 
-\begin{itemize}
-    \item Propositional formula, predicates (constant, variable, set)
-    \item Satisfaction
-    \item Variable and constant
-    \item Normal form
-\end{itemize}
+A tuple $\tuple$ \emph{satisfies} a selection rule $\srule$ (written as $\tuple \models \srule$) if substitution of each attribute $\attr$ with its value $\projection{\tuple}{\attr}$ in the formula $\formula$ of $\srule$ causes $\formula$ to evaluate to true.
+Otherwise, we say that $\tuple$ \emph{violates} or \emph{fails} $\srule$ (written as $\tuple \not\models \srule$).
+Given a set of selection rules $\sruleset$, we denote the subset of rules violated by $\tuple$ as $\srulesetfailed{\sruleset}{\tuple} = \{\srule \mid \srule \in \sruleset \wedge \tuple \not\models \srule\}$.
+A tuple $\tuple$ is \emph{consistent} with respect to $\sruleset$ if $\srulesetfailed{\sruleset}{\tuple} = \emptyset$ (written as $\tuple \models \sruleset$), and \emph{inconsistent} otherwise (written as $\tuple \not\models \sruleset$).
+If an attribute $\attr \in \schema$ appears in one of the atoms of  $\srule$, $\attr$ is \emph{involved} in $\srule$, and the set of attributes that are involved in $\srule$ is denoted by $\involvedattr{\srule}$.
+
+Finally, we distinguish three special types of selection rules.
+First, a selection rule $\srule$ is a \emph{tautology} if its formula $\formula$ evaluates to always true, or $\formula \equiv \top$.
+Second, $\srule$ is a \emph{contradiction} if its formula $\formula$ evaluates to always false, or $\formula \equiv \bot$.
+Third, $\srule_r$ with formula $\formulaindex{r}$ is \emph{redundant} to $\srule_d$ with formula $\formulaindex{d}$ (or $\srule_d$ \emph{dominates} $\srule_r$) if $\formula_r \Rightarrow \formula_d$.
+
+%\begin{itemize}
+%    \item Variable and constant rules?
+%    \item Univariate, multivariate rules?
+%    \item Set cover, super cover
+%   \item Equivalence?
+%\end{itemize}
+
+\paragraph{Cost functions and models.}
+For an attribute $\attr \in \schema$ with domain $\domain$, a \emph{cost function} is a positive-definite function $\costfunctionattr{\attr} : \domain^2 \rightarrow \mathbb{N}$ that assigns, to each pair of values $(\domainvalue, \domainvalue') \in \domain^2$, the cost $\costfunctionattrvalues{\attr}{\domainvalue}{\domainvalue'}$ to change $\domainvalue$ into $\domainvalue'$ in a relation $\relation$ over $\schema$~\cite{Bronselaer2023}.
+A cost function is called \emph{constant} if there exists a constant value $\alpha > 0$ such that, for all distinct pairs $(\domainvalue, \domainvalue') \in \domain^2$ with $\domainvalue \neq \domainvalue'$, we have $\costfunctionattrvalues{\attr}{\domainvalue}{\domainvalue'} = \alpha$.
+It is often desirable, though not required, that the cost of changing the \texttt{null}-value into $\domainvalue \in \domain$ is constant, or, in other words, independent of $\domainvalue$.
+Note, in this regard, that, while each attribute domain $\domain$ excludes the \texttt{null}-value,
+we extend the domain of definition of each cost function to $(\domain \cup\{\texttt{null}\})^2$, thereby allowing updates involving missing values to be evaluated.
+A \emph{cost model} $\costmodel$ for schema $\schema$ defines a cost function $\costfunctionattr{\attr}$ for each $\attr \in \schema$.
+Given a cost model, the total cost of changing a tuple $\tuple$ into $\tuple'$ is then computed as
+\begin{equation}
+    \label{eq:costmodel}
+    \costmodeltuples{\tuple}{\tuple'} = \sum_{\attr \in \schema} \costfunctionattrvalues{\attr}{\projection{\tuple}{\attr}}{\projection{\tuple'}{\attr}}.
+\end{equation}
