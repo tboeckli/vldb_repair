@@ -6,6 +6,14 @@ cid: 0.41
 tl: 55.25
 th: 0
 
+failed rules:
+-------------
+th = null: {th}
+
+minimal set covers:
+-------------------
+{th}
+
 change expressions:
 -------------------
 ce1: PC > 0 & LTP >= 0 & TL >= 0 & TH >= 0 & PC > LTP & CID < 0 & LTP >= TL & LTP <= TH & PC > TL & TL <= TH

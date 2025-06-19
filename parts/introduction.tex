@@ -12,6 +12,7 @@
         2 & 28.92 & 27.72 & 1.20 $\rightarrow$ -1.20 & 27.63 & 28.78 \\
         3 & 55.24 & 55.65 & 0.41 & 55.25 & \texttt{null} $\rightarrow$ 55.87 \\
         4 & 39.11 & 38.99 & 0.12 $\rightarrow$ -0.12 & 38.03 & 38.71 $\rightarrow$ 39.17 \\
+        5 & 44.35 & 44.10 & 0.25 $\rightarrow$ -0.25 & 44.44 $\rightarrow$ 44.10 & 44.55 \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -23,10 +24,10 @@
         \toprule
         \textbf{rule} & $\formula$ & \textbf{rule} & $\formula$ \\
         \midrule
-        $\sruleindex{1}$ & $\text{pc} \geq 0$ & $\sruleindex{10}$ & $\neg (\text{pc} \leq \text{tl} \wedge \text{cd} < 0)$ \\
-        $\sruleindex{2}$ & $\text{ltp} \geq 0$ & $\sruleindex{11}$ & $\neg (\text{pc} < \text{tl} \wedge \text{cd} = 0)$ \\
-        $\sruleindex{3}$ & $\text{tl} \geq 0$ & $\sruleindex{12}$ & $\neg (\text{pc} \geq \text{th} \wedge \text{cd} > 0)$ \\
-        $\sruleindex{4}$ & $\text{th} \geq 0$ & $\sruleindex{13}$ & $\neg (\text{pc} > \text{th} \wedge \text{cd} = 0)$ \\
+        $\sruleindex{1}$ & $\neg (\text{pc} < 0)$ & $\sruleindex{10}$ & $\neg (\text{pc} \leq \text{tl} \wedge \text{cd} < 0)$ \\
+        $\sruleindex{2}$ & $\neg (\text{ltp} < 0)$ & $\sruleindex{11}$ & $\neg (\text{pc} < \text{tl} \wedge \text{cd} = 0)$ \\
+        $\sruleindex{3}$ & $\neg (\text{tl} < 0)$ & $\sruleindex{12}$ & $\neg (\text{pc} \geq \text{th} \wedge \text{cd} > 0)$ \\
+        $\sruleindex{4}$ & $\neg (\text{th} < 0)$ & $\sruleindex{13}$ & $\neg (\text{pc} > \text{th} \wedge \text{cd} = 0)$ \\
         $\sruleindex{5}$ & $\neg (\text{pc} \leq \text{ltp} \wedge \text{cd} < 0)$ & $\sruleindex{14}$ & $\neg (\text{ltp} \leq 0 \wedge \text{cd} > 0)$ \\
         $\sruleindex{6}$ & $\neg (\text{pc} \geq \text{ltp} \wedge \text{cd} > 0)$ & $\sruleindex{15}$ & $\neg (\text{pc} \leq 0 \wedge \text{cd} < 0)$ \\
         $\sruleindex{7}$ & $\neg (\text{pc} \neq \text{ltp} \wedge \text{cd} = 0)$ & $\sruleindex{16}$ & $\neg (\text{th} \leq 0 \wedge \text{cd} > 0)$ \\

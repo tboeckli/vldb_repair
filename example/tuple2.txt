@@ -6,6 +6,16 @@ cid: 1.2
 tl: 27.63
 th: 28.78
 
+failed rules:
+-------------
+e6: {pc, ltp, cd}
+e12: {pc, th, cd}
+
+minimal set covers:
+-------------------
+{pc}
+{cd}
+
 change expressions:
 -------------------
 ce1: CID < 0

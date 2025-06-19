@@ -3,11 +3,13 @@
 
 \paragraph{Relational model.}
 In this paper, we assume the relational model~\cite{Codd1970}.
-Within this context, let $\attrset$ be a countable set of attributes.
+Within this model, let $\attrset$ be a countable set of attributes.
 For each attribute $\attr \in \attrset$, let $\domain$ denote its \emph{domain} of possible values, excluding the \texttt{null}-value (or missing value).
 Without loss of generality, we assume that each domain is infinite, yet countable (either ordered or unordered).
 In the case of continuous domains, we enforce countability of $\domain$ by applying fixed-precision truncation on the domain values.
 For instance, in Example~\ref{ex:runningexample}, each decimal number is truncated to two decimals places.
+In the remainder, we will use the notation $\domainnull$ to refer to the domain of attribute $\attr$ including the \texttt{null}-value, or $\domainnull = \domain \cup \{\texttt{null}\}$.
+
 A \emph{(relation) schema} $\schema = \{\attrindex{1},\ldots,\attrindex{k}\}$ is a finite, non-empty subset of attributes.
 A \emph{relation} $\relation$ over $\schema$ is a finite set $\relation \subseteq \domainindex{1} \times \ldots \times \domainindex{k}$, where $\domainindex{i}$ is the domain of $\attrindex{i}$.
 Each element $\tuple \in \relation$ is called a \emph{tuple} $\tuple$ over $\schema$, and we assume that each $\schema$ includes a distinguished attribute \texttt{tid} whose values uniquely identify the tuples in $\relation$.
@@ -33,7 +35,7 @@ For constant and variable atoms, the comparison operator $\operator$ is drawn fr
 For set atoms, we have that $\operator \in \{\in, \notin\}$.
 In the context of ordered domains, we consider an extension of variable atoms which allows us to explicitly express \emph{gaps} between the values of the attributes.
 More specifically, these atoms take the form $\attrindex{i}\;\operator\; \successorfunction{n}{\attrindex{j}}$ in this case, with $n \in \mathbb{Z}$ and $\successor: \domain \rightarrow \domain$ the so-called \emph{successor function}.
-This function returns for each $\domainvalue \in \domain$ the smallest value $\domainvalue' \in \domain$ such that $\domainvalue < \domainvalue'$ and there is no $\domainvalue'' \in \domain$ with $\domainvalue < \domainvalue'' < \domainvalue'$.
+This function returns, for any $\domainvalue \in \domain$, the smallest value $\domainvalue' \in \domain$ such that $\domainvalue < \domainvalue'$ and there is no $\domainvalue'' \in \domain$ with $\domainvalue < \domainvalue'' < \domainvalue'$.
 Moreover, we write $\successorpower{n}$ for the $n$-fold application of the successor function.
 If $n < 0$, the application of the \emph{inverse} successor function, also referred to as the \emph{predecessor} function, is assumed.
 
@@ -56,11 +58,10 @@ Third, $\srule_r$ with formula $\formulaindex{r}$ is \emph{redundant} to $\srule
 %\end{itemize}
 
 \paragraph{Cost functions and models.}
-For an attribute $\attr \in \schema$ with domain $\domain$, a \emph{cost function} is a positive-definite function $\costfunctionattr{\attr} : \domain^2 \rightarrow \mathbb{N}$ that assigns, to each pair of values $(\domainvalue, \domainvalue') \in \domain^2$, the cost $\costfunctionattrvalues{\attr}{\domainvalue}{\domainvalue'}$ to change $\domainvalue$ into $\domainvalue'$ in a relation $\relation$ over $\schema$~\cite{Bronselaer2023}.
-A cost function is called \emph{constant} if there exists a constant value $\alpha > 0$ such that, for all distinct pairs $(\domainvalue, \domainvalue') \in \domain^2$ with $\domainvalue \neq \domainvalue'$, we have $\costfunctionattrvalues{\attr}{\domainvalue}{\domainvalue'} = \alpha$.
-It is often desirable, though not required, that the cost of changing the \texttt{null}-value into $\domainvalue \in \domain$ is constant, or, in other words, independent of $\domainvalue$.
-Note, in this regard, that, while each attribute domain $\domain$ excludes the \texttt{null}-value,
-we extend the domain of definition of each cost function to $(\domain \cup\{\texttt{null}\})^2$, thereby allowing updates involving missing values to be evaluated.
+For an attribute $\attr \in \schema$ with domain $\domain$, a \emph{cost function} $\costfunctionattr{\attr} : \domainnull \times \domainnull \rightarrow \mathbb{N}$ is a positive-definite function that assigns, to each pair of values $(\domainvalue, \domainvalue') \in \domainnull \times \domainnull$, a cost $\costfunctionattrvalues{\attr}{\domainvalue}{\domainvalue'}$ to change $\domainvalue$ into $\domainvalue'$ in a relation $\relation$ over $\schema$~\cite{Bronselaer2023}.
+A cost function is called \emph{constant} if there exists a constant value $\alpha > 0$ such that, for all distinct pairs $(\domainvalue, \domainvalue') \in \domainnull \times \domainnull$ with $\domainvalue \neq \domainvalue'$, we have $\costfunctionattrvalues{\attr}{\domainvalue}{\domainvalue'} = \alpha$.
+Note that the domain of definition of each cost function is $\domainnull \times \domainnull$, thereby allowing updates involving missing values to be evaluated.
+In this regard, it is often desirable, though not required, that the cost of changing the \texttt{null}-value into $\domainvalue \in \domain$ is constant, or, in other words, independent of $\domainvalue$, and the cost of changing a value $\domainvalue \in \domain$ to the \texttt{null}-value is infinite.
 A \emph{cost model} $\costmodel$ for schema $\schema$ defines a cost function $\costfunctionattr{\attr}$ for each $\attr \in \schema$.
 Given a cost model, the total cost of changing a tuple $\tuple$ into $\tuple'$ is then computed as
 \begin{equation}

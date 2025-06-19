@@ -1,0 +1,26 @@
+tuple:
+------
+pc: 44.35
+ltp: 44.10
+cid: 0.25
+tl: 44.44
+th: 44.55
+
+failed rules:
+-------------
+e6: {pc, ltp, cd}
+e8: {ltp, tl}
+
+minimal set covers:
+-------------------
+{ltp}
+
+change expressions:
+-------------------
+..
+
+minimal-cost change expressions:
+--------------------------------
+pc = 43.85 & tl <= 44.10
+cid = -0.25 & tl <= 44.10
+ltp >= 44.44 & ltp <= 44.55
